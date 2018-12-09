@@ -4,4 +4,5 @@
 3 - init<br>
 4 - To configure access to the database in the common/main-local.php<br>
 5 - yii migrate
-
+<br><br>
+rename htaccess.txt to .htaccess if you need settings for apache server

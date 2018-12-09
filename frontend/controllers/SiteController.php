@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use project\account\AccountServices;
 use project\bonus\BonusServices;
 
+use project\payments\Payment;
 use Yii;
 
 
@@ -15,14 +16,16 @@ class SiteController extends AppController
 {
 
     private $_bonus_services;
+    private $_payment;
     private $_bonus_repository;
     private $_account;
 
-    public function __construct(string $id, $module, AccountServices $account, BonusServices $bonus_services, array $config = [])
+    public function __construct(string $id, $module, AccountServices $account, BonusServices $bonus_services, Payment $payment, array $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->_account = $account;
         $this->_bonus_services = $bonus_services;
+        $this->_payment = $payment;
         $this->_bonus_repository = $bonus_services->repository;
 
     }
@@ -87,6 +90,14 @@ class SiteController extends AppController
 
     function actionWithdrawBank($id)
     {
+        try{
+            $bonus = $this->_bonus_repository->getById($id);
+            $this->_payment->withdraw->bank()->forBonus()->newTransaction($this->_account->getId(), $bonus->value);
+            Yii::$app->session->setFlash('success', 'Отлично. Запрос отправлен в обработку.');
+            $this->redirect('/');
+        }catch (\Exception $e){
+            return $this->render('error', ['exception' => $e]);
+        }
 
     }
 

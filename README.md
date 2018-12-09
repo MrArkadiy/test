@@ -6,3 +6,5 @@
 5 - yii migrate
 <br><br>
 rename htaccess.txt to .htaccess if you need settings for apache server
+<br><br><br><br>
+sponsor of my English - Yandex Translate

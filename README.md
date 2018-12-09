@@ -5,6 +5,8 @@
 4 - To configure access to the database in the common/main-local.php<br>
 5 - yii migrate
 <br><br>
+all logic in ./project
+<br><br>
 rename htaccess.txt to .htaccess if you need settings for apache server
 <br><br><br><br>
 sponsor of my English - Yandex Translate
